@@ -1,0 +1,73 @@
+radius = 10
+x = 20
+y = 20
+x1 = 0
+speed = 20
+directionX = 1
+directionX1 = 1
+
+def setup():
+   
+    size(624, 390)
+    frameRate(30)
+
+def draw():
+    global x
+    global x1
+    global directionX
+    global directionX1 
+    
+    img = loadImage("background.jpg")
+    background(img)
+    img2 = loadImage("mario.png")
+   
+    #boundaries
+    if x1 >= 624:
+        x = 0
+    
+    x = x + speed*directionX
+    
+    x1 = x1 + speed*directionX1
+    if x1 >= 485:
+        x1 = 0
+    
+    #border
+    if x>width-radius or (x<radius):
+        directionX = -directionX
+    
+    if y>height-radius or (y<radius):
+        directionY = -directionY
+        
+    noStroke()
+    triangle(200,75,100,50,100,100)
+    fill(0,255,0)
+    rect(width-95,height/2-80,50,150)
+    fill(220,20,60)
+    ellipse(x,height/2-50,50,50)
+    fill(30,144,255)
+    rect(40, height/2-100,50,50)
+    fill(255)
+    image(img2, x1, height/2, 50,50)   
+    
+    textSize(40)
+    fill(0,0,255)
+    text("What a beautiful day!", 10, 30)
+    
+def mouseClicked():
+    global x1
+    global directionX1
+    
+    if mouseClicked == True:
+        if directionX1<0:
+            directionX1 = -1
+    else:
+        x1 = 0
+        
+def keyPressed():
+    global x1
+    global directionX1
+    if(key == CODED):
+        if (keyCode == LEFT):
+            if (directionX1>0):
+                directionX1 = -1
+      
